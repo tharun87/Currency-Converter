@@ -5,6 +5,7 @@ const fromCurr = document.querySelector(".from select")
 const toCurr = document.querySelector(".to select")  
 
 const btn = document.querySelector("form button");
+const exchangeSymbol = document.querySelector("#exchange_symbol");
 
 for(let select of dropdowns){
     for(currCode in countryList){
@@ -59,4 +60,15 @@ btn.addEventListener("click", async (evt) => {
         document.querySelector(".msg").innerText = "Error fetching exchange rate.";
         console.error(err);
     }
+});
+
+exchangeSymbol.addEventListener("click", () => {
+    // Swap the selected values
+    let temp = fromCurr.value;
+    fromCurr.value = toCurr.value;
+    toCurr.value = temp;
+
+    // Update the flags accordingly
+    updateFlag(fromCurr);
+    updateFlag(toCurr);
 });
